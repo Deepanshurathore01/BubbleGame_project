@@ -1,3 +1,5 @@
+var hitrn =0;
+
 // function to create bubble 
 function makeBubbles(){
   var clutter ="";
@@ -14,12 +16,13 @@ document.querySelector("#pbtm").innerHTML =clutter;
 var timer =60; 
 function runTimer(){
 var timeInt = setInterval(function(){
-  if(timer >0){
+  if(timer > 0){
     timer--;
     document.querySelector("#timeInt").textContent= timer;
   }
   else {
-    clearInterval(timerInt);
+    clearInterval(timeInt);
+    document.querySelector("#pbtm").innerHTML= `<h1>Game Over</h1>`;
   }
   
 },1000)
@@ -27,8 +30,8 @@ var timeInt = setInterval(function(){
 
 // get new hit 
 function getNewHit(){
-  var rn =Math.floor(Math.random()*10);
-  document.querySelector("#hitval").textContent= rn;
+  hitrn =Math.floor(Math.random()*10);
+  document.querySelector("#hitval").textContent= hitrn;
 }
 
 // scroe value
@@ -37,6 +40,16 @@ function increaseScore(){
   score +=10;
   document.querySelector("#score").textContent = score;
 }
+
+// eventlistner 
+document.querySelector("#pbtm").addEventListener("click",function(debts){
+ var clickednum = Number(debts.target.textContent);
+ if(clickednum === hitrn){
+  increaseScore();
+  makeBubbles();
+  getNewHit();
+ }
+});
 
 runTimer();
 makeBubbles();
